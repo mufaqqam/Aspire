@@ -13,22 +13,7 @@ app.use(cors());// Enable Cross-Origin Resource Sharing (CORS) for the express a
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-/**
- * Connect to MongoDB database.
- *
- * @param {string} process.env.MONGODB_URI - MongoDB connection string.
- * @param {Object} { useNewUrlParser, useUnifiedTopology } - Options for MongoDB connection.
- */
-mongoose
-  .connect(
-    "mongodb+srv://muffa:mufaqqam@aspire1.d8myfli.mongodb.net/?retryWrites=true&w=majority",
-    { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log("Connected to MongoDB successfully");
-  })
-  .catch((err) => {
-    console.log("Error connecting to MongoDB:", err);
-  });
+require ('./db');
 
 const storage = multer.diskStorage({
   /**
