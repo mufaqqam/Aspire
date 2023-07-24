@@ -13,7 +13,22 @@ app.use(cors());// Enable Cross-Origin Resource Sharing (CORS) for the express a
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-require ('./db');
+/**
+ * Connect to MongoDB database.
+ *
+ * @param {string} process.env.MONGODB_URI - MongoDB connection string.
+ * @param {Object} { useNewUrlParser, useUnifiedTopology } - Options for MongoDB connection.
+ */
+mongoose
+  .connect(
+    "mongodb+srv://muffa:mufaqqam@aspire1.d8myfli.mongodb.net/?retryWrites=true&w=majority",
+    { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log("Connected to MongoDB successfully");
+  })
+  .catch((err) => {
+    console.log("Error connecting to MongoDB:", err);
+  });
 
 const storage = multer.diskStorage({
   /**
@@ -57,13 +72,7 @@ app.put(
      * @param {string} name - The name associated with the uploaded image.
      * @param {Object} img - The image object containing file data and content type.
      */
-    const saveImage = imageModel({
-      name: req.body.name,// Extract the name from the request body
-      img: {
-        data: fs.readFileSync("./uploads/car.png"),// Read and store the image file data
-        contentType: "image/png",// Set the content type of the image
-      },
-    });
+    0
 
     saveImage
       .save()
